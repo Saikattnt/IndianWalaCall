@@ -14,10 +14,14 @@ export const AuthContext = createContext(null);
 const serverUrl = import.meta.env.VITE_SERVER_URL;
 let baseURL = "http://localhost:8000/api/v1/users";
 
+
 if (serverUrl) {
   const origin = serverUrl.startsWith("http") ? serverUrl : `https://${serverUrl}`;
   baseURL = `${origin}/api/v1/users`;
 }
+
+console.log("API Base URL:", baseURL);
+
 
 const client = axios.create({
   baseURL: baseURL,
