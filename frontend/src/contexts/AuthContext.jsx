@@ -11,16 +11,14 @@ import httpStatus from "http-status";
 
 export const AuthContext = createContext(null);
 
-const serverUrl = import.meta.env.VITE_SERVER_URL;
+
+const serverUrl = "https://zoom-clone-backend-u9gj.onrender.com";
 let baseURL = "http://localhost:8000/api/v1/users";
 
-
-if (serverUrl) {
-  const origin = serverUrl.startsWith("http") ? serverUrl : `https://${serverUrl}`;
-  baseURL = `${origin}/api/v1/users`;
+if (import.meta.env.PROD) {
+    baseURL = `${serverUrl}/api/v1/users`;
 }
 
-console.log("API Base URL:", baseURL);
 
 
 const client = axios.create({
