@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: zoom-clone-backend
+    env: node
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm run prod
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.0
+      - key: MONGO_URI
+        sync: false
+  - type: static
+    name: zoom-clone-frontend
+    env: static
+    buildCommand: cd frontend && npm install && npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_SERVER_URL
+        fromService:
+          type: web
+          name: zoom-clone-backend
+          property: url
