@@ -8,21 +8,18 @@ import React, {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import httpStatus from "http-status";
+import server from "../environment";
 
 export const AuthContext = createContext(null);
 
 
-const serverUrl = "https://zoom-clone-backend-u9gj.onrender.com";
-let baseURL = "http://localhost:8000/api/v1/users";
+const serverUrl = server;
 
-if (import.meta.env.PROD) {
-    baseURL = `${serverUrl}/api/v1/users`;
-}
 
 
 
 const client = axios.create({
-  baseURL: baseURL,
+  baseURL: `${server}/api/v1/users`,
 });
 
 // attach token automatically (if present)
