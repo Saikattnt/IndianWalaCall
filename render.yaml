@@ -19,4 +19,4 @@ services:
         fromService:
           type: web
           name: zoom-clone-backend
-          property: url
+          property: host
