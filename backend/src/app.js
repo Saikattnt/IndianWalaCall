@@ -27,7 +27,15 @@ app.use(compression());
 app.use(express.json({ limit: "40kb" }));
 app.use(express.urlencoded({ limit: "40kb", extended: true }));
 
+
 app.use("/api/v1/users", userRoutes); //version
+
+app.get("/", (req, res) => {
+    return res.json({
+        message: "Server is running"
+    })
+})
+
 
 const start = async () => {
   const connectionDb = await mongoose.connect(
