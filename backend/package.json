@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon src/app.js",
-    "prod": "pm2 src/app.js"
+    "prod": "node src/app.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
