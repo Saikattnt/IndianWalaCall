@@ -9,6 +9,7 @@ services:
         value: 20.11.0
       - key: MONGO_URI
         sync: false
+    plan: free
   - type: web
     name: zoom-clone-frontend
     env: static
