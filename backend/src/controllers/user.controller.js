@@ -8,15 +8,15 @@ import crypto from "crypto";
 //LOGIN
 
 const login = async (req, res) => {
-  const { username, password } = req.body;
+  const { email, password } = req.body;
 
-  if (!username || !password) {
+  if (!email || !password) {
     //subject to change
     return res.status(400).json({ message: "Please Provide mentioned fields" });
   }
 
   try {
-    const user = await User.findOne({ username }); //findOne is use for unique search of one single document
+    const user = await User.findOne({ email }); //findOne is use for unique search of one single document
     if (!user) {
       return res
         .status(httpStatus.NOT_FOUND)
@@ -39,7 +39,7 @@ const login = async (req, res) => {
       user: {
         id: user._id,
         name: user.name,
-        username: user.username,
+        email: user.email,
       },
     });
   } catch (e) {
@@ -52,10 +52,10 @@ const login = async (req, res) => {
 //REGISTER
 
 const register = async (req, res) => {
-  const { name, username, password } = req.body;
+  const { name, email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ username });
+    const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res
         .status(httpStatus.FOUND)
@@ -66,7 +66,7 @@ const register = async (req, res) => {
 
     const newUser = new User({
       name: name,
-      username: username,
+      email: email,
       password: hashedPassword,
     });
 
@@ -95,7 +95,7 @@ const getUserHistory = async (req, res) => {
         .json({ message: "Invalid token" });
     }
 
-    const meetings = await Meeting.find({ user_id: user.username }).sort({
+    const meetings = await Meeting.find({ user_id: user.email }).sort({
       date: -1,
     });
     return res.status(httpStatus.OK).json(meetings);
@@ -124,7 +124,7 @@ const addToHistory = async (req, res) => {
     }
 
     const newMeeting = new Meeting({
-      user_id: user.username,
+      user_id: user.email,
       meetingCode: meeting_code,
     });
 

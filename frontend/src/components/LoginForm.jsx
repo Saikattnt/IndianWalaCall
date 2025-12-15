@@ -27,7 +27,7 @@ export default function SignInCard() {
 
   // form fields
   const [fullName, setFullName] = useState("");
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   // password visibility
@@ -53,23 +53,23 @@ export default function SignInCard() {
     try {
       if (formState === 0) {
         // SIGN IN
-        const res = await handleLogin(username, password);
+        const res = await handleLogin(email, password);
         setSnackMsg(res?.message || "Signed in");
         setSnackOpen(true);
 
         // If these were auto-filled from sign-up, clear them after login
         if (prefillOnce) {
-          setUsername("");
+          setEmail("");
           setPassword("");
           setPrefillOnce(false);
         }
       } else {
         // SIGN UP
-        const u = username.trim();
+        const e = email.trim();
         const p = password; // keep exact password
         const n = fullName.trim();
 
-        const res = await handleRegister({ name: n, username: u, password: p });
+        const res = await handleRegister({ name: n, email: e, password: p });
         setSnackMsg(res?.message || "Account created");
         setSnackOpen(true);
 
@@ -79,8 +79,8 @@ export default function SignInCard() {
         // 2) switch to Sign In
         setFormState(0);
 
-        // 3) prefill username/password ONCE on the sign-in side
-        setUsername(u);
+        // 3) prefill email/password ONCE on the sign-in side
+        setEmail(e);
         setPassword(p);
         setPrefillOnce(true); // true means attribute cleared from the field
       }
@@ -213,15 +213,15 @@ export default function SignInCard() {
       )}
 
       <TextField
-        label="Username"
-        name="username"
-        id="username"
+        label="Email"
+        name="email"
+        id="email"
         fullWidth
         variant="outlined"
         size="medium"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        autoComplete="username"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        autoComplete="email"
         sx={{
           "& .MuiOutlinedInput-root": {
             "& fieldset": { borderColor: "rgba(255,255,255,0.3)" },

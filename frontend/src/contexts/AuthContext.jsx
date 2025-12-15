@@ -51,8 +51,8 @@ export const AuthProvider = ({ children }) => {
     })();
   }, []);
 
-  const handleRegister = async ({ name, username, password }) => {
-    const res = await client.post("/register", { name, username, password });
+  const handleRegister = async ({ name, email, password }) => {
+    const res = await client.post("/register", { name, email, password });
     if (res.status === httpStatus.CREATED) {
       if (res.data?.user) setUserData(res.data.user);
       navigate("/login", { replace: true });
@@ -60,8 +60,8 @@ export const AuthProvider = ({ children }) => {
     return res.data; // e.g. { message, user, token? }
   };
 
-  const handleLogin = async (username, password) => {
-    const res = await client.post("/login", { username, password });
+  const handleLogin = async (email, password) => {
+    const res = await client.post("/login", { email, password });
     if (res.status === httpStatus.OK) {
       if (res.data?.token) localStorage.setItem("token", res.data.token);
       if (res.data?.user) setUserData(res.data.user);
