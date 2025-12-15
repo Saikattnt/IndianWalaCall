@@ -762,10 +762,13 @@ export default function VideoMeetComponent() {
                       try {
                         ref.srcObject = remote.stream;
                         ref.autoplay = true;
-                        ref.muted = true; // mute remote autoplay to allow autoplay
+                        // ref.muted = true; // REMOVED to allow audio
                         ref.onloadedmetadata = () => {
                           try {
-                            ref.play().catch(() => {});
+                            ref.play().catch((e) => {
+                                console.error("Autoplay failed:", e);
+                                // User interaction might be required
+                            });
                           } catch (e) {}
                         };
                       } catch (e) {
@@ -776,7 +779,7 @@ export default function VideoMeetComponent() {
                     }
                   }}
                   autoPlay
-                  muted
+                  // muted // REMOVED to allow audio
                 />
               </div>
             ))}
