@@ -27,26 +27,6 @@ function HomeComponent() {
           <h2>IndianWalaCall</h2>
         </div>
 
-        <div className={styles.heroSection}>
-          <h1 className={styles.heroTitle}>
-            Video call and meeting for <br /> everyone
-          </h1>
-          <div>
-            <h2 className={styles.heroSubtitle}>
-              <span className={`${styles.badge} ${styles.badgeConnect}`}>
-                Connect
-              </span>
-              <span className={`${styles.badge} ${styles.badgeCollaborate}`}>
-                Collaborate
-              </span>
-              <span className={`${styles.badge} ${styles.badgeGossip}`}>
-                Gossip
-              </span>{" "}
-              all in one place
-            </h2>
-          </div>
-        </div>
-
         <div className={styles.historyLogoutContainer}>
           <IconButton
             onClick={() => {
@@ -64,6 +44,26 @@ function HomeComponent() {
           >
             LogOut
           </Button>
+        </div>
+      </div>
+
+      <div className={styles.heroSection}>
+        <h1 className={styles.heroTitle}>
+          Video call and meeting for <br /> everyone
+        </h1>
+        <div>
+          <h2 className={styles.heroSubtitle}>
+            <span className={`${styles.badge} ${styles.badgeConnect}`}>
+              Connect
+            </span>
+            <span className={`${styles.badge} ${styles.badgeCollaborate}`}>
+              Collaborate
+            </span>
+            <span className={`${styles.badge} ${styles.badgeGossip}`}>
+              Gossip
+            </span>{" "}
+            all in one place
+          </h2>
         </div>
       </div>
 

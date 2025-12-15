@@ -3,6 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
+  width: 100%;
 }
 
 .logoContainer {
@@ -70,9 +71,13 @@
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: row; /* Keep row on mobile for logo left, actions right */
     padding: 1rem;
+    align-items: center;
+  }
+
+  .logoContainer h2 {
+    font-size: 1.2rem; /* Reduce logo size slightly if needed */
   }
   
   .heroSection {
@@ -85,13 +90,14 @@
   
   .heroSubtitle {
     font-size: 1.2rem;
-    flex-direction: column;
+    flex-direction: row; /* Force row */
+    flex-wrap: nowrap; /* No wrapping if possible, or let it wrap if really tight but user wanted single row */
     gap: 0.5rem;
   }
 
   .badge {
-    font-size: 1.1rem;
-    padding: 5px 10px;
+    font-size: 1rem; /* Smaller font for badges on mobile */
+    padding: 5px 8px;
     margin: 0;
   }
   
@@ -102,9 +108,20 @@
   }
 
   .cardRow {
-    flex-direction: column;
-    gap: 2rem;
+    flex-direction: row; /* Row on mobile too */
+    flex-wrap: nowrap;
+    gap: 1rem;
     margin-top: 30px;
+    overflow-x: hidden; /* Prevent scroll if they fit, or auto if they don't but user asked for fitted */
+    justify-content: space-around; /* Distribute evenly */
+    padding-inline: 10px;
+  }
+
+  .card {
+     width: 80px;  /* Much smaller on mobile */
+     height: 80px; 
+     min-width: 80px;
+     min-height: 80px;
   }
   
   .divider {
