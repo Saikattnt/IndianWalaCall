@@ -1,5 +1,6 @@
 // src/components/SignInCard.jsx
 import React, { useState, useContext } from "react";
+import { useLocation } from "react-router-dom";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -17,8 +18,12 @@ import { AuthContext } from "../contexts/AuthContext";
 export default function SignInCard() {
   const theme = useTheme();
 
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const mode = searchParams.get('mode');
+
   // 0 = Sign In, 1 = Sign Up
-  const [formState, setFormState] = useState(0);
+  const [formState, setFormState] = useState(mode === 'signup' ? 1 : 0);
 
   // form fields
   const [fullName, setFullName] = useState("");
