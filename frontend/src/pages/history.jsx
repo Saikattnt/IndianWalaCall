@@ -47,9 +47,9 @@ export default function History() {
         <HomeIcon />
       </IconButton>
       {meetings.length !== 0 ? (
-        meetings.map((e, i) => {
-          return (
-            <>
+        <div className="historyContainer">
+          {meetings.map((e, i) => {
+            return (
               <Card key={i} variant="outlined">
                 <CardContent>
                   <Typography
@@ -65,9 +65,9 @@ export default function History() {
                   </Typography>
                 </CardContent>
               </Card>
-            </>
-          );
-        })
+            );
+          })}
+        </div>
       ) : (
         <></>
       )}

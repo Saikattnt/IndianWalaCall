@@ -1,8 +1,115 @@
 .navbar {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  padding-right: 20px;
+  padding: 1rem 2rem;
+}
+
+.logoContainer {
+  /* previously inline padding */
+}
+
+.heroSection {
+  padding-top: 5rem;
+  text-align: center;
+}
+
+.heroTitle {
+  font-weight: 400;
+  font-size: 2.5rem;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 2rem;
+  padding-top: 15px;
+  font-weight: lighter;
+  color: rgba(94, 105, 112, 1);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.badge {
+  border-radius: 30px;
+  padding: 9px 14px;
+  font-size: 1.5rem;
+  color: black; /* Assuming black text on colored bg */
+}
+
+.badgeConnect { background-color: #9ec3cfff; }
+.badgeCollaborate { background-color: #9ecfaaff; }
+.badgeGossip { background-color: #cf9ea5ff; }
+
+.historyLogoutContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.joinContainer {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 65px;
+  align-items: center;
+}
+
+.dividerContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 70px;
+}
+
+.divider {
+  border-bottom: 1px solid black;
+  width: 50%;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .heroSection {
+    padding-top: 2rem;
+  }
+  
+  .heroTitle {
+    font-size: 1.8rem;
+  }
+  
+  .heroSubtitle {
+    font-size: 1.2rem;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    font-size: 1.1rem;
+    padding: 5px 10px;
+    margin: 0;
+  }
+  
+  .joinContainer {
+    flex-direction: column;
+    width: 100%;
+    padding-inline: 1rem;
+  }
+
+  .cardRow {
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 30px;
+  }
+  
+  .divider {
+    width: 80%;
+  }
 }
 
 .meetContainer {

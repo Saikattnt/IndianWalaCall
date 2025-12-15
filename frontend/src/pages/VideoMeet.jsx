@@ -667,11 +667,11 @@ export default function VideoMeetComponent() {
       ) : (
         <div className={styles.meetVideoContainer}>
           {showModel ? (
-            <div className={styles.chatroom}>
+            <div className={`${styles.chatroom} ${styles.active}`}>
               <div className={styles.chatContainer}>
                 <h2>Chat</h2>
 
-                <div className="chattingDisplay">
+                <div className={styles.chattingDisplay}>
                   {messages.length > 0 ? (
                     messages.map((item, index) => {
                       return (
@@ -692,6 +692,7 @@ export default function VideoMeetComponent() {
                     label="Enter Your Chat"
                     variant="filled"
                     value={message}
+                    fullWidth
                     onChange={(e) => setMessage(e.target.value)}
                   />
                   <Button variant="contained" onClick={sendMessage}>

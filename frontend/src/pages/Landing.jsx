@@ -12,7 +12,7 @@ export default function LandingPage() {
         </div>
         <h1>
           <span style={{ color: "#FF9839" }}>Connect</span>{" "}
-          <span style={{ fontSize: 45 }}>Talk</span>
+          <span className="connectTalk">Talk</span>
         </h1>
         <div className="navlist">
           <div role="button" className="glassButton">

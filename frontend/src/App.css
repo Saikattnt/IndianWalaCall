@@ -28,6 +28,10 @@
 .landingPageContainer .navHeader h2 {
 }
 
+.connectTalk {
+  font-size: 45px;
+}
+
 /* Classy glassmorphism button */
 .glassButton {
   display: inline-block;
@@ -74,4 +78,51 @@
   display: flex;
   justify-content: center;
   padding-top: 65vh;
+}
+
+@media (max-width: 768px) {
+  .landingPageContainer nav {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    padding-block: 1rem;
+  }
+
+  .landingPageContainer nav .navlist {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .landingPageContainer nav h2 {
+    font-size: 1.5rem;
+  }
+
+  .landingPageContainer h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .landingPageContainer h1 span[style*="fontSize"] {
+    font-size: 35px !important;
+  }
+
+  .landingMainContainer {
+    padding-top: 50vh;
+  }
+  
+  .glassButton {
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+    text-align: center;
+  }
+}
+
+.historyContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
 }

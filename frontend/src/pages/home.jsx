@@ -23,53 +23,23 @@ function HomeComponent() {
   return (
     <>
       <div className={styles.navbar}>
-        <div style={{ paddingLeft: "10px", paddingTop: "10px" }}>
+        <div className={styles.logoContainer}>
           <h2>IndianWalaCall</h2>
         </div>
 
-        <div
-          style={{ paddingTop: "100px", textAlign: "center", fontSize: "26px" }}
-        >
-          <h1 style={{ fontWeight: "400" }}>
+        <div className={styles.heroSection}>
+          <h1 className={styles.heroTitle}>
             Video call and meeting for <br /> everyone
           </h1>
           <div>
-            <h2
-              style={{
-                fontSize: "35px",
-                paddingTop: "15px",
-                fontWeight: "lighter",
-                color: " rgba(94, 105, 112, 1)",
-              }}
-            >
-              <span
-                style={{
-                  backgroundColor: "#9ec3cfff",
-                  borderRadius: "30px",
-                  marginRight: "8px",
-                  padding: "9px 14px",
-                }}
-              >
+            <h2 className={styles.heroSubtitle}>
+              <span className={`${styles.badge} ${styles.badgeConnect}`}>
                 Connect
               </span>
-              <span
-                style={{
-                  backgroundColor: "#9ecfaaff",
-                  borderRadius: "30px",
-                  marginRight: "8px",
-                  padding: "9px 14px",
-                }}
-              >
+              <span className={`${styles.badge} ${styles.badgeCollaborate}`}>
                 Collaborate
               </span>
-              <span
-                style={{
-                  backgroundColor: "#cf9ea5ff",
-                  borderRadius: "30px",
-                  marginRight: "8px",
-                  padding: "9px 14px",
-                }}
-              >
+              <span className={`${styles.badge} ${styles.badgeGossip}`}>
                 Gossip
               </span>{" "}
               all in one place
@@ -77,7 +47,7 @@ function HomeComponent() {
           </div>
         </div>
 
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div className={styles.historyLogoutContainer}>
           <IconButton
             onClick={() => {
               navigate("/history");
@@ -98,14 +68,7 @@ function HomeComponent() {
       </div>
 
       <div className={styles.meetContainer}>
-        <div
-          style={{
-            display: "flex",
-            gap: "10px",
-            justifyContent: "center",
-            paddingTop: "65px",
-          }}
-        >
+        <div className={styles.joinContainer}>
           <TextField
             onChange={(e) => setMeetingCode(e.target.value)}
             id="outlined-basic"
@@ -126,19 +89,8 @@ function HomeComponent() {
         </div>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-        }}
-      >
-        <div
-          style={{
-            borderBottom: "1px solid black",
-            width: "50%",
-            paddingTop: "70px",
-          }}
-        ></div>
+      <div className={styles.dividerContainer}>
+        <div className={styles.divider}></div>
       </div>
 
       <div className={styles.cardRow}>
