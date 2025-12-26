@@ -11,7 +11,7 @@ services:
         sync: false
     plan: free
   - type: web
-    name: zoom-clone-frontend
+    name: IndianWalaCall
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
