@@ -11,7 +11,7 @@ services:
         sync: false
     plan: free
   - type: web
-    name: IndianWalaCall
+    name: IndianWalaCall-frontend
     env: static
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
@@ -19,5 +19,5 @@ services:
       - key: VITE_SERVER_URL
         fromService:
           type: web
-          name: IndianWalaCall-frontend
+          name: IndianWalaCall-backend
           property: host

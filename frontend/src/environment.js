@@ -1,9 +1,3 @@
-let IS_PROD = true;
-const server = IS_PROD ? 
-     "https://zoom-clone-backend-u9gj.onrender.com"
- : 
-    "http://localhost:5173"
-
-   
+const server = import.meta.env.VITE_SERVER_URL || "http://localhost:8000";
 
 export default server;
