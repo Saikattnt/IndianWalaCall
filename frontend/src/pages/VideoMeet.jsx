@@ -314,9 +314,12 @@ export default function VideoMeetComponent() {
             }
           };
 
-          // receive remote stream (use onaddstream here, as in repo)
-          connections[socketListId].onaddstream = (event) => {
-            console.log("onaddstream from", socketListId, event.stream);
+          // receive remote stream (modern ontrack API)
+          connections[socketListId].ontrack = (event) => {
+            console.log("ontrack from", socketListId, event.streams[0]);
+
+            const [remoteStream] = event.streams;
+            if (!remoteStream) return;
 
             setVideos((prev) => {
               const exists = prev.find(
@@ -325,7 +328,7 @@ export default function VideoMeetComponent() {
               if (exists) {
                 const updated = prev.map((video) =>
                   video.socketId === socketListId
-                    ? { ...video, stream: event.stream }
+                    ? { ...video, stream: remoteStream }
                     : video
                 );
                 videoRef.current = updated;
@@ -333,7 +336,7 @@ export default function VideoMeetComponent() {
               } else {
                 const newVideo = {
                   socketId: socketListId,
-                  stream: event.stream,
+                  stream: remoteStream,
                   autoplay: true,
                 };
                 const updated = [...prev, newVideo];
@@ -343,15 +346,15 @@ export default function VideoMeetComponent() {
             });
           };
 
-          // add local stream
-          if (window.localStream) {
-            connections[socketListId].addStream(window.localStream);
-          } else {
+          // add local tracks
+          if (!window.localStream) {
             let blackSilence = (...args) =>
               new MediaStream([black(...args), silence()]);
             window.localStream = blackSilence();
-            connections[socketListId].addStream(window.localStream);
           }
+          window.localStream.getTracks().forEach(track => {
+            connections[socketListId].addTrack(track, window.localStream);
+          });
         }
       });
 
@@ -359,10 +362,6 @@ export default function VideoMeetComponent() {
       if (id === socketIdRef.current) {
         for (let id2 in connections) {
           if (id2 === socketIdRef.current) continue;
-
-          try {
-            connections[id2].addStream(window.localStream);
-          } catch (e) {}
 
           connections[id2]
             .createOffer()
@@ -412,7 +411,15 @@ export default function VideoMeetComponent() {
     for (let id in connections) {
       if (id === socketIdRef.current) continue;
 
-      connections[id].addStream(window.localStream);
+      const senders = connections[id].getSenders();
+      window.localStream.getTracks().forEach(track => {
+        const sender = senders.find(s => s.track && s.track.kind === track.kind);
+        if (sender) {
+          sender.replaceTrack(track);
+        } else {
+          connections[id].addTrack(track, window.localStream);
+        }
+      });
 
       connections[id]
         .createOffer()
@@ -447,7 +454,15 @@ export default function VideoMeetComponent() {
           localVideoRef.current.srcObject = window.localStream;
 
           for (let id in connections) {
-            connections[id].addStream(window.localStream);
+            const senders = connections[id].getSenders();
+            window.localStream.getTracks().forEach(track => {
+              const sender = senders.find(s => s.track && s.track.kind === track.kind);
+              if (sender) {
+                sender.replaceTrack(track);
+              } else {
+                connections[id].addTrack(track, window.localStream);
+              }
+            });
             connections[id].createOffer().then((description) => {
               connections[id].setLocalDescription(description).then(() => {
                 socketRef.current.emit(
@@ -553,9 +568,17 @@ export default function VideoMeetComponent() {
       if (id === socketIdRef.current) continue;
 
       try {
-        connections[id].addStream(window.localStream);
+        const senders = connections[id].getSenders();
+        window.localStream.getTracks().forEach(track => {
+          const sender = senders.find(s => s.track && s.track.kind === track.kind);
+          if (sender) {
+            sender.replaceTrack(track);
+          } else {
+            connections[id].addTrack(track, window.localStream);
+          }
+        });
       } catch (e) {
-        console.log("addStream error:", e);
+        console.log("addTrack error:", e);
       }
 
       connections[id]
